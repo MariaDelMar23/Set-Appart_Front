@@ -72,16 +72,17 @@ const RegisterForm = (): JSX.Element => {
       ? formData.password === formData.repeatPassword
       : false;
 
-  const renderIcon = (label: Label): JSX.Element | undefined =>
-    label.id === "repeatPassword" ? (
-      checkPassword() ? (
-        <CheckIcon color="gray" />
-      ) : (
-        <CrossIcon color="text-gray-400" />
-      )
-    ) : (
-      label.icon
-    );
+  const renderIcon = (label: Label): JSX.Element | undefined => {
+    if (label.id === "repeatPassword") {
+      if (checkPassword()) {
+        return <CheckIcon color="text-gray-400" />;
+      } else {
+        return <CrossIcon color="text-gray-400" />;
+      }
+    } else {
+      return label.icon;
+    }
+  };
 
   return (
     <>
